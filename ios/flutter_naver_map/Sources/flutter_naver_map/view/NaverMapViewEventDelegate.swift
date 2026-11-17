@@ -57,8 +57,8 @@ internal class NaverMapViewEventDelegate: NSObject, NMFMapViewTouchDelegate, NMF
 
         mapView.setCustomStyleId(
             mapView.customStyleId,
-            loadHandler: sender?.onCustomStyleLoaded,
-            failHandler: sender?.onCustomStyleLoadFailed
+            loadHandler: { [weak sender] in sender?.onCustomStyleLoaded() },
+            failHandler: { [weak sender] error in sender?.onCustomStyleLoadFailed(exception: error) }
         )
     }
 
